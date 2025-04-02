@@ -1,0 +1,33 @@
+<header class="main-nav">
+    <nav class="nav-container">
+        <a href="/" class="logo">
+            <i data-feather="home"></i>
+            <span>{{ site.title }}</span>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link {% if page.url == '/' %}active{% endif %}">
+                <i data-feather="home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="/portfolio" class="nav-link {% if page.url contains 'portfolio' %}active{% endif %}">
+                <i data-feather="book"></i>
+                <span>Portafolio</span>
+            </a>
+            <a href="/blog" class="nav-link {% if page.url contains 'blog' %}active{% endif %}">
+                <i data-feather="edit-3"></i>
+                <span>Blog</span>
+            </a>
+            <a href="/about" class="nav-link {% if page.url contains 'about' %}active{% endif %}">
+                <i data-feather="user"></i>
+                <span>Acerca de</span>
+            </a>
+            <a href="/contact" class="nav-link {% if page.url contains 'contact' %}active{% endif %}">
+                <i data-feather="mail"></i>
+                <span>Contacto</span>
+            </a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Alternar Modo Oscuro">
+                <i data-feather="moon"></i>
+            </button>
+        </div>
+    </nav>
+</header>

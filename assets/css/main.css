@@ -1,0 +1,728 @@
+/* Base styles */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* Variables for light mode - The Legend of Zelda NES Palette */
+:root {
+    --primary-color: #7CFC00; /* LawnGreen */
+    --secondary-color: #DAA520; /* GoldenRod */
+    --background-color: #F0E68C; /* Khaki */
+    --text-color: #000000; /* Black */
+    --border-color: #DAA520; /* GoldenRod */
+    --nav-bg: #006400; /* DarkGreen */
+    --card-bg: rgba(0, 0, 0, 0.7);
+    --card-border: 4px solid var(--primary-color);
+    --card-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    --pixel-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+
+    /* Cambiar color de títulos del blog a amarillo en modo claro */
+    .post-title {
+        color: #B8860B; /* DarkGoldenRod */
+    }
+}
+
+/* Variables for dark mode - The Legend of Zelda NES Palette */
+[data-theme="dark"] {
+    --primary-color: #7CFC00; /* LawnGreen */
+    --secondary-color: #FFD700; /* Gold */
+    --background-color: #2F4F4F; /* DarkSlateGray */
+    --text-color: #FFFFFF; /* White */
+    --border-color: #B8860B; /* DarkGoldenRod */
+    --nav-bg: #006400; /* DarkGreen */
+    --card-bg: rgba(0, 0, 0, 0.7);
+    --card-border: 4px solid var(--primary-color);
+    --card-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    --pixel-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+
+    /* Cambiar color de títulos del blog a amarillo en modo oscuro */
+    .post-title {
+        color: #FFD700; /* GoldenYellow */
+    }
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-image: url('/assets/images/zelda-pattern.png');
+    background-repeat: repeat;
+    background-size: 100px;
+}
+
+/* Navigation styles */
+.nav-container {
+    background-color: var(--nav-bg);
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+}
+
+.nav-container a:hover {
+    color: var(--secondary-color);
+}
+
+.nav-container a.active {
+    color: var(--secondary-color);
+}
+
+.nav-container a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.logo i {
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Home page styles */
+.intro-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: var(--card-border);
+    background-color: var(--card-bg);
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/triforce-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200px;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.intro-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: var(--pixel-shadow);
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 2px;
+}
+
+.intro-subtitle {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
+}
+
+.button-group {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.retro-button {
+    background-color: var(--nav-bg);
+    border: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.retro-button:hover {
+    background-color: var(--primary-color);
+    color: var(--nav-bg);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.retro-button::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+/* Adventure Stats styles */
+.adventure-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.stat-box {
+    border: 3px solid var(--primary-color);
+    padding: 1.5rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/pixel-pattern.png');
+    background-repeat: repeat;
+    background-size: 20px;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.stat-number {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: var(--pixel-shadow);
+}
+
+.stat-label {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+/* Latest Quests styles */
+.main-content {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: var(--pixel-shadow);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.section-title::before {
+    content: '►';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+}
+
+.quest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.quest-card {
+    border: var(--card-border);
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quest-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.quest-title {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.quest-date {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    font-family: 'VT323', monospace;
+}
+
+.quest-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0 0 1rem 0;
+    flex-grow: 1;
+}
+
+.quest-link {
+    display: inline-block;
+    background-color: var(--nav-bg);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    text-decoration: none;
+    text-align: center;
+    margin-top: auto;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.quest-link:hover {
+    background-color: var(--primary-color);
+    color: var(--nav-bg);
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    background-color: var(--nav-bg);
+    border-top: 4px solid var(--primary-color);
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 3rem;
+}
+
+/* About page styles */
+.about-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: var(--card-border);
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+}
+
+.pixel-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 1rem 0 2rem 0;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: var(--pixel-shadow);
+    letter-spacing: 2px;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.pixel-title::before {
+    content: '►';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+}
+
+/* Character Stats styles for About page */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.stats-grid .stat-box {
+    border: var(--card-border);
+    padding: 2rem 1.5rem;
+}
+
+.stats-grid .stat-box h3 {
+    color: var(--primary-color);
+    margin: 0 0 1.5rem 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: var(--pixel-shadow);
+}
+
+.stats-grid .stat-box p {
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--secondary-color);
+}
+
+/* Backstory styles */
+.backstory {
+    margin: 4rem 0;
+    border: var(--card-border);
+    padding: 2rem;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.backstory::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/triforce-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200px;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.backstory p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.backstory p:last-child {
+    margin-bottom: 0;
+}
+
+/* Skills styles */
+.skills {
+    margin-top: 4rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill {
+    border: var(--card-border);
+    padding: 1.5rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: var(--card-shadow);
+    border-radius: 4px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--primary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill:hover {
+    background-color: var(--primary-color);
+    color: var(--nav-bg);
+    transform: scale(1.05);
+    cursor: pointer;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.skill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/pixel-pattern.png');
+    background-repeat: repeat;
+    background-size: 20px;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+/* Contact page styles */
+.contact-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: var(--card-border);
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+}
+
+.contact-container h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: var(--pixel-shadow);
+    font-family: 'Press Start 2P', cursive;
+}
+
+.contact-info {
+    margin-top: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.contact-item:hover {
+    transform: translateX(5px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.contact-item i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.contact-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.contact-item a:hover {
+    color: var(--primary-color);
+}
+
+/* Blog page styles */
+.post-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.post-item {
+    border: var(--card-border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+}
+
+.post-title {
+    margin-bottom: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: var(--pixel-shadow);
+}
+
+.post-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-meta {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    font-family: 'VT323', monospace;
+}
+
+.post-excerpt {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Video page styles */
+.video-detail {
+    border: var(--card-border);
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+}
+
+.window-header {
+    background-color: var(--nav-bg);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.window-header i {
+    color: var(--primary-color);
+}
+
+.window-header span {
+    color: var(--primary-color);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+}
+
+.window-content {
+    padding: 2rem;
+}
+
+/* Retro container titles */
+.retro-container h1,
+.retro-container h2,
+.retro-container h3 {
+    text-shadow: var(--pixel-shadow);
+    font-family: 'Press Start 2P', cursive;
+    color: var(--primary-color);
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle:focus {
+    outline: none;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 1.8rem;
+    }
+
+    .quest-grid, .adventure-stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .about-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .pixel-title {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid .stat-box {
+        padding: 1.5rem 1rem;
+    }
+
+    .stats-grid .stat-box h3 {
+        font-size: 1rem;
+    }
+
+    .skill {
+        padding: 1rem;
+    }
+    
+    .nav-container {
+        padding: 0.5rem 0;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-container a {
+        margin: 0.3rem 0;
+        font-size: 0.7rem;
+    }
+    
+    .logo {
+        margin-bottom: 0.5rem;
+    }
+    
+    .theme-toggle {
+        margin: 0.5rem auto;
+    }
+}

@@ -1,0 +1,160 @@
+---
+layout: default
+title: Portafolio
+---
+<div class="snes-container">
+    <div class="snes-window">
+        <div class="window-header">
+            <i data-feather="film"></i>
+            <span>Videos</span>
+        </div>
+        <div class="window-content">
+            <div class="video-grid">
+                {% for video in site.videos %}
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/{{ video.youtube_id }}/maxresdefault.jpg" alt="{{ video.title }}">
+                        <div class="video-overlay">
+                            <div class="video-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">Director:</span>
+                                    <span>{{ video.director }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Artista:</span>
+                                    <span>{{ video.artist }}</span>
+                                </div>
+                            </div>
+                            <a href="{{ video.url }}" class="snes-button">Ver Más</a>
+                        </div>
+                    </div>
+                    <h2 class="video-title">{{ video.title }}</h2>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.video-card {
+    background: #202020;
+    border: 4px solid var(--primary-color);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.video-thumbnail {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(32, 32, 32, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+}
+
+.video-card:hover .video-overlay {
+    opacity: 1;
+}
+
+.video-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    padding: 1rem;
+    margin: 0;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.video-meta {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--text-color);
+}
+
+.meta-label {
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.snes-button {
+    background: var(--primary-color);
+    color: var(--text-color);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.snes-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-title {
+        font-size: 0.8rem;
+    }
+
+    .meta-item {
+        font-size: 0.6rem;
+    }
+}
+
+.video-grid > .video-card {
+    /* Añadido para animaciones */
+}
+
+/* Retro container titles */
+.retro-container h1,
+.retro-container h2,
+.retro-container h3 {
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
+}
+</style>

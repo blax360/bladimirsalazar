@@ -1,0 +1,44 @@
+title: Bladimir Salazar
+email: blax360.com@gmail.com
+description: Director & Content Creator
+baseurl: ""
+url: "https://bladimirsalazar.com"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  videos:
+    output: true
+    permalink: /portfolio/:title/
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "videos"
+    values:
+      layout: "video"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Theme settings
+theme_settings:
+  # SNES inspired colors
+  primary_color: "#9333ea"
+  background_color: "#1a1a1a"
+  text_color: "#ffffff"
