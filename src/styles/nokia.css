@@ -1,0 +1,706 @@
+/* ============================================
+   BS-OS — Nokia Mobile Theme
+   Estilo Nokia antiguo con pantalla LCD
+   ============================================ */
+
+:root {
+  --nokia-bg: #1a1a1a;
+  --nokia-lcd: #9bbc0f;
+  --nokia-lcd-dark: #306230;
+  --nokia-lcd-darker: #0f380f;
+  --nokia-lcd-light: #c4e04a;
+  --nokia-frame: #2b2b2b;
+  --nokia-frame-light: #3a3a3a;
+  --nokia-frame-dark: #111;
+  --nokia-button: #1a1a1a;
+  --nokia-button-active: #0a0a0a;
+  --nokia-text: #0f380f;
+  --nokia-text-light: #306230;
+  --nokia-accent: #8bac0f;
+  --nokia-font: 'VT323', 'Courier New', monospace;
+  --nokia-font-size: 18px;
+  --nokia-line-height: 1.4;
+}
+
+.nokia-body {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--nokia-frame);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.nokia-phone {
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 900px;
+  background: var(--nokia-frame);
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow:
+    inset 0 0 0 2px var(--nokia-frame-light),
+    inset 0 0 0 4px var(--nokia-frame-dark),
+    0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 480px) and (min-height: 700px) {
+  .nokia-phone {
+    border-radius: 24px;
+    padding: 16px;
+  }
+}
+
+/* Top speaker grille */
+.nokia-speaker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+  gap: 3px;
+}
+
+.nokia-speaker-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--nokia-frame-dark);
+}
+
+/* Brand text */
+.nokia-brand {
+  text-align: center;
+  font-family: var(--nokia-font);
+  font-size: 14px;
+  color: var(--nokia-frame-light);
+  letter-spacing: 2px;
+  padding: 2px 0 6px;
+  text-transform: uppercase;
+}
+
+/* LCD Screen */
+.nokia-screen-wrap {
+  background: var(--nokia-lcd-darker);
+  border-radius: 6px;
+  padding: 6px;
+  margin: 4px 8px;
+  box-shadow:
+    inset 0 0 0 2px var(--nokia-frame-dark),
+    inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.nokia-screen {
+  background: var(--nokia-lcd);
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 0;
+  border-radius: 2px;
+}
+
+/* LCD scanline effect */
+.nokia-screen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(15, 56, 15, 0.06) 2px,
+    rgba(15, 56, 15, 0.06) 3px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Status bar */
+.nokia-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  color: var(--nokia-text);
+  border-bottom: 2px solid var(--nokia-lcd-dark);
+  flex-shrink: 0;
+  background: var(--nokia-lcd);
+}
+
+.nokia-statusbar-title {
+  font-weight: bold;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.nokia-statusbar-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* Screen content area */
+.nokia-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px;
+  font-family: var(--nokia-font);
+  font-size: var(--nokia-font-size);
+  line-height: var(--nokia-line-height);
+  color: var(--nokia-text);
+  background: var(--nokia-lcd);
+  min-height: 0;
+}
+
+.nokia-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nokia-content::-webkit-scrollbar-track {
+  background: var(--nokia-lcd-dark);
+}
+
+.nokia-content::-webkit-scrollbar-thumb {
+  background: var(--nokia-lcd-darker);
+  border-radius: 3px;
+}
+
+/* Menu list */
+.nokia-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nokia-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-family: var(--nokia-font);
+  font-size: var(--nokia-font-size);
+  color: var(--nokia-text);
+  cursor: pointer;
+  border: 2px solid transparent;
+  margin-bottom: 2px;
+}
+
+.nokia-menu-item.selected {
+  background: var(--nokia-lcd-dark);
+  border: 2px solid var(--nokia-text);
+  font-weight: bold;
+  color: var(--nokia-lcd);
+}
+
+.nokia-menu-item-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.nokia-menu-item-arrow {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+/* Content views */
+.nokia-view {
+  padding: 4px;
+}
+
+.nokia-view h1 {
+  font-family: var(--nokia-font);
+  font-size: 22px;
+  color: var(--nokia-text);
+  margin-bottom: 8px;
+  border-bottom: 2px solid var(--nokia-lcd-dark);
+  padding-bottom: 4px;
+}
+
+.nokia-view h2 {
+  font-family: var(--nokia-font);
+  font-size: 20px;
+  color: var(--nokia-text);
+  margin: 12px 0 4px;
+}
+
+.nokia-view h3 {
+  font-family: var(--nokia-font);
+  font-size: 18px;
+  color: var(--nokia-text);
+  margin: 8px 0 4px;
+}
+
+.nokia-view p {
+  font-family: var(--nokia-font);
+  font-size: var(--nokia-font-size);
+  line-height: var(--nokia-line-height);
+  color: var(--nokia-text);
+  margin-bottom: 8px;
+}
+
+.nokia-view a {
+  color: var(--nokia-text);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.nokia-view ul {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 8px;
+}
+
+.nokia-view li {
+  font-family: var(--nokia-font);
+  font-size: var(--nokia-font-size);
+  line-height: var(--nokia-line-height);
+  color: var(--nokia-text);
+  padding: 2px 0 2px 16px;
+  position: relative;
+}
+
+.nokia-view li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.nokia-view strong {
+  font-weight: bold;
+  color: var(--nokia-lcd-darker);
+}
+
+.nokia-view em {
+  font-style: italic;
+  color: var(--nokia-text-light);
+}
+
+.nokia-view code {
+  font-family: var(--nokia-font);
+  background: var(--nokia-lcd-dark);
+  padding: 1px 4px;
+  font-size: 16px;
+}
+
+.nokia-view blockquote {
+  border-left: 3px solid var(--nokia-lcd-dark);
+  padding-left: 12px;
+  margin: 8px 0;
+  color: var(--nokia-text-light);
+}
+
+/* Cards / lists in views */
+.nokia-card {
+  background: var(--nokia-lcd-dark);
+  border: 2px solid var(--nokia-text);
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.nokia-card.selected {
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+}
+
+.nokia-card.selected .nokia-card-title,
+.nokia-card.selected .nokia-card-desc,
+.nokia-card.selected .nokia-card-meta {
+  color: var(--nokia-lcd);
+}
+
+.nokia-card-title {
+  font-family: var(--nokia-font);
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--nokia-text);
+  margin-bottom: 2px;
+}
+
+.nokia-card-meta {
+  font-family: var(--nokia-font);
+  font-size: 14px;
+  color: var(--nokia-text-light);
+  margin-bottom: 4px;
+}
+
+.nokia-card-desc {
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  color: var(--nokia-text);
+  line-height: 1.3;
+}
+
+.nokia-card-badge {
+  display: inline-block;
+  font-family: var(--nokia-font);
+  font-size: 13px;
+  padding: 0 4px;
+  border: 1px solid var(--nokia-text);
+  margin-right: 4px;
+}
+
+/* Filter buttons */
+.nokia-filters {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.nokia-filter-btn {
+  font-family: var(--nokia-font);
+  font-size: 15px;
+  padding: 4px 10px;
+  background: var(--nokia-lcd);
+  border: 2px solid var(--nokia-lcd-dark);
+  color: var(--nokia-text);
+  cursor: pointer;
+}
+
+.nokia-filter-btn.active {
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+  border-color: var(--nokia-text);
+}
+
+/* Forms */
+.nokia-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nokia-form label {
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--nokia-text);
+}
+
+.nokia-input {
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  padding: 6px 8px;
+  background: var(--nokia-lcd-light);
+  border: 2px solid var(--nokia-text);
+  color: var(--nokia-text);
+  outline: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.nokia-input:focus {
+  background: var(--nokia-lcd);
+  border-color: var(--nokia-lcd-darker);
+}
+
+.nokia-textarea {
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  padding: 6px 8px;
+  background: var(--nokia-lcd-light);
+  border: 2px solid var(--nokia-text);
+  color: var(--nokia-text);
+  outline: none;
+  min-height: 80px;
+  resize: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.nokia-submit-btn {
+  font-family: var(--nokia-font);
+  font-size: 18px;
+  padding: 8px 16px;
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Social links */
+.nokia-social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-family: var(--nokia-font);
+  font-size: 17px;
+  color: var(--nokia-text);
+  text-decoration: none;
+  border: 2px solid transparent;
+  margin-bottom: 4px;
+}
+
+.nokia-social-link:active,
+.nokia-social-link.selected {
+  background: var(--nokia-lcd-dark);
+  border-color: var(--nokia-text);
+}
+
+.nokia-social-link-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+/* Download button */
+.nokia-download-btn {
+  display: inline-block;
+  font-family: var(--nokia-font);
+  font-size: 17px;
+  padding: 6px 14px;
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 6px;
+  border: none;
+}
+
+/* Navigation buttons (physical phone buttons) */
+.nokia-keypad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px 12px;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.nokia-nav-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nokia-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--nokia-font);
+  font-size: 16px;
+  color: var(--nokia-frame-light);
+  background: var(--nokia-button);
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  min-height: 36px;
+  min-width: 44px;
+  box-shadow:
+    0 2px 0 var(--nokia-frame-dark),
+    inset 0 1px 0 var(--nokia-frame-light);
+  transition: transform 0.05s;
+}
+
+.nokia-nav-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 0 0 var(--nokia-frame-dark),
+    inset 0 1px 0 var(--nokia-frame-light);
+  background: var(--nokia-button-active);
+}
+
+.nokia-nav-btn-wide {
+  padding: 8px 24px;
+}
+
+/* D-pad */
+.nokia-dpad {
+  display: grid;
+  grid-template-columns: 36px 36px 36px;
+  grid-template-rows: 36px 36px 36px;
+  gap: 0;
+}
+
+.nokia-dpad-up { grid-column: 2; grid-row: 1; }
+.nokia-dpad-left { grid-column: 1; grid-row: 2; }
+.nokia-dpad-center { grid-column: 2; grid-row: 2; }
+.nokia-dpad-right { grid-column: 3; grid-row: 2; }
+.nokia-dpad-down { grid-column: 2; grid-row: 3; }
+
+.nokia-dpad-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--nokia-font);
+  font-size: 18px;
+  color: var(--nokia-frame-light);
+  background: var(--nokia-button);
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow:
+    0 1px 0 var(--nokia-frame-dark),
+    inset 0 1px 0 var(--nokia-frame-light);
+  transition: transform 0.05s;
+}
+
+.nokia-dpad-btn:active {
+  transform: translateY(1px);
+  background: var(--nokia-button-active);
+}
+
+.nokia-dpad-center {
+  background: var(--nokia-frame-light);
+  color: var(--nokia-frame-dark);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.nokia-dpad-center:active {
+  background: var(--nokia-button);
+}
+
+/* Soft keys (left/right options) */
+.nokia-softkeys {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 8px;
+}
+
+.nokia-softkey {
+  font-family: var(--nokia-font);
+  font-size: 15px;
+  color: var(--nokia-frame-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  min-height: 32px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nokia-softkey:active {
+  color: var(--nokia-lcd);
+}
+
+.nokia-softkey-center {
+  font-family: var(--nokia-font);
+  font-size: 14px;
+  color: var(--nokia-frame-dark);
+  padding: 6px 8px;
+  text-align: center;
+}
+
+/* Boot screen */
+.nokia-boot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: var(--nokia-font);
+  color: var(--nokia-text);
+  text-align: center;
+  gap: 12px;
+}
+
+.nokia-boot-logo {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.nokia-boot-sub {
+  font-size: 16px;
+  color: var(--nokia-text-light);
+}
+
+/* Scrollbar styling for nokia content */
+.nokia-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--nokia-lcd-darker) var(--nokia-lcd-dark);
+}
+
+/* Tags */
+.nokia-tags {
+  font-family: var(--nokia-font);
+  font-size: 14px;
+  color: var(--nokia-text-light);
+  margin-top: 4px;
+}
+
+/* IA badge for Nokia */
+.nokia-ia-badge {
+  display: inline-block;
+  font-family: var(--nokia-font);
+  font-size: 13px;
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+  padding: 0 6px;
+  margin: 2px 0;
+  font-weight: bold;
+}
+
+/* Project link card */
+.nokia-project-card {
+  background: var(--nokia-lcd-dark);
+  border: 2px solid var(--nokia-text);
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  text-decoration: none;
+  color: var(--nokia-text);
+  display: block;
+}
+
+.nokia-project-card:active {
+  background: var(--nokia-text);
+  color: var(--nokia-lcd);
+}
+
+.nokia-project-card:active .nokia-card-title,
+.nokia-project-card:active .nokia-card-desc,
+.nokia-project-card:active .nokia-card-meta {
+  color: var(--nokia-lcd);
+}
+
+/* Divider */
+.nokia-divider {
+  height: 2px;
+  background: var(--nokia-lcd-dark);
+  margin: 8px 0;
+  border: none;
+}

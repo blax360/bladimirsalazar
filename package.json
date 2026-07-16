@@ -1,0 +1,28 @@
+{
+  "name": "bs-os",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "BS-OS — Personal website styled as a Windows 3.1 desktop OS for Bladimir Salazar, filmmaker.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run fetch:social && astro build",
+    "build:only": "astro build",
+    "preview": "astro preview",
+    "fetch:social": "tsx src/scripts/fetch-social-content.ts",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/svelte": "^9.0.0",
+    "astro": "^7.0.0",
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.14.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.9.3"
+  }
+}

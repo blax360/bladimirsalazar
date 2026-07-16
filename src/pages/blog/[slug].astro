@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const contentType = post.data.contentType ?? 'markdown';
+---
+
+<BlogLayout title={`${post.data.title} — BS-OS`}>
+  <div style="position:fixed; top:0; left:0; right:0; bottom:0; background:var(--win-teal); z-index:99999; display:flex; align-items:center; justify-content:center; padding:40px;">
+    <div class="window" style="position:relative; width:100%; max-width:700px; height:auto; max-height:90vh; display:flex; flex-direction:column;">
+      <div class="window-title-bar">
+        <span class="window-title-icon" style="width:16px; height:16px; display:inline-block; background:var(--win-yellow); border:1px solid var(--win-black);"></span>
+        <span class="window-title-text">{post.data.title} — Bloc de Notas</span>
+        <div class="window-controls">
+          <a href="/" class="window-btn window-btn-close" style="text-decoration:none; display:flex; align-items:center; justify-content:center;">✕</a>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <span class="window-menubar-item"><u>A</u>rchivo</span>
+        <span class="window-menubar-item"><u>E</u>dición</span>
+        <span class="window-menubar-item"><u>B</u>úsqueda</span>
+        <span class="window-menubar-item"><u>A</u>yuda</span>
+      </div>
+      <div class="window-body win-scroll" style="background:#fff;">
+        <div class="prose-win" style="padding:20px 28px;">
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--win-gray-dark);">
+            {contentType === 'youtube' && <span class="blog-card-badge youtube" style="font-size:9px;">YouTube</span>}
+            {contentType === 'instagram' && <span class="blog-card-badge instagram" style="font-size:9px;">Instagram</span>}
+            {contentType === 'markdown' && <span class="blog-card-badge markdown" style="font-size:9px;">Artículo</span>}
+            <span style="font-size:10px; color:var(--win-text-disabled);">
+              {new Date(post.data.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </span>
+            {post.data.category && <span style="font-size:10px; color:var(--win-text-disabled);">— {post.data.category}</span>}
+          </div>
+
+          {contentType === 'youtube' && post.data.youtubeId && (
+            <div style="margin:16px 0;">
+              <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border:2px solid var(--win-gray-dark); background:#000;">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${post.data.youtubeId}`}
+                  title={post.data.title}
+                  style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div style="margin-top:8px; display:flex; gap:12px; font-size:10px; color:var(--win-text-disabled);">
+                {post.data.videoDuration && <span>Duración: {post.data.videoDuration}</span>}
+                {post.data.viewCount !== undefined && <span>Vistas: {post.data.viewCount.toLocaleString()}</span>}
+              </div>
+            </div>
+          )}
+
+          {contentType === 'instagram' && post.data.instagramImages && post.data.instagramImages.length > 0 && (
+            <div style="margin:16px 0;">
+              <img src={post.data.instagramImages[0]} alt={post.data.title} style="width:100%; border:2px solid var(--win-gray-dark);" loading="lazy" />
+              <a href={post.data.instagramUrl} target="_blank" rel="noopener" style="font-size:10px; color:var(--win-blue);">Ver en Instagram →</a>
+            </div>
+          )}
+
+          <Content />
+
+          <div style="margin-top:24px; padding-top:12px; border-top:1px solid var(--win-gray-dark); display:flex; justify-content:space-between; align-items:center;">
+            <a href="/" style="font-size:11px; color:var(--win-blue); text-decoration:none;">
+              <button class="btn-win">← Volver a BS-OS</button>
+            </a>
+            <div style="display:flex; gap:8px;">
+              <a href={`https://www.youtube.com/@BladimirSalazar`} target="_blank" rel="noopener" style="font-size:10px;">YouTube</a>
+              <a href={`https://instagram.com/blax360`} target="_blank" rel="noopener" style="font-size:10px;">Instagram</a>
+              <a href={`https://www.imdb.com/name/nm1873474/`} target="_blank" rel="noopener" style="font-size:10px;">IMDb</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="window-statusbar">
+        <div class="window-statusbar-field">BS-OS</div>
+        <div class="window-statusbar-field" style="flex:0 0 auto;">{post.data.category ?? 'General'}</div>
+      </div>
+    </div>
+  </div>
+</BlogLayout>

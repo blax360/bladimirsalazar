@@ -1,0 +1,16 @@
+@import './win31.css';
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+::selection {
+  background: var(--win-blue);
+  color: var(--win-white);
+}
+
+:focus-visible {
+  outline: 1px dotted var(--win-black);
+  outline-offset: -2px;
+}

@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import '../styles/nokia.css';
+import OS from '../components/OS.svelte';
+import { getCollection } from 'astro:content';
+
+// Configuración general (wallpaper, showreel, redes) desde src/content/settings/site-config.md
+const settingsEntries = await getCollection('settings');
+const siteConfig = settingsEntries[0]?.data ?? {};
+
+// Los recursos se leen de src/content/resources/*.md
+// Para publicar un recurso nuevo: crea un archivo .md en esa carpeta y listo.
+const resourceEntries = await getCollection('resources');
+const resources = resourceEntries
+  .map((entry) => ({
+    id: entry.id,
+    title: entry.data.title,
+    description: entry.data.description,
+    category: entry.data.category,
+    tags: entry.data.tags ?? [],
+    date: entry.data.date.toISOString().slice(0, 10),
+    aiGenerated: entry.data.aiGenerated,
+    link: entry.data.link,
+    manualLink: entry.data.manualLink,
+  }))
+  .sort((a, b) => b.date.localeCompare(a.date));
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+  <meta name="description" content="BS-OS — El escritorio de Bladimir Salazar, cineasta y filmmaker. Proyectos, blog, recursos y más." />
+  <title>BS-OS — Bladimir Salazar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <OS client:only="svelte" {resources} config={siteConfig} />
+</body>
+</html>
